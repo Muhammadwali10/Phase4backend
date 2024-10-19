@@ -34,7 +34,7 @@ The goal of this project is to develop a full-stack application that allows user
 2. Install dependencies:
 
    ```bash
-   pip install -r backend/requirements.txt
+   pip install -r requirements.txt
    ```
 3.Set up the database:
 
