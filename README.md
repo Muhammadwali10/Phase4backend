@@ -36,6 +36,14 @@ The goal of this project is to develop a full-stack application that allows user
    ```bash
    pip install -r backend/requirements.txt
    ```
+3.Set up the database:
+
+Initialize the database:
+# python app.py db init
+Migrate the database:
+# python app.py db migrate
+Upgrade the database:
+# python app.py db upgrade
 
 
 ## Registration Endpoint Example
@@ -49,6 +57,20 @@ To register a new user, send a POST request to the `/register` endpoint with the
 }
 ```
 
+
+## Login Endpoint Example
+
+To login a registered user, send a POST request to the `/login` endpoint with the following JSON payload:
+
+```json
+{
+  "email": "jane.smith@example.com",
+  "password": "P@ssw0rd!"
+}
+```
+
+
+```
 This example uses a real-life email and password format.
 
 # Quicknotes
@@ -61,12 +83,20 @@ This example uses a real-life email and password format.
   - `Content-Type: application/json`
   - `Authorization: Bearer <token>`
 - **Body (raw JSON):**
+
   ```json
   {
     "title": "Meeting Notes",
     "content": "Discussed project updates and set next meeting for Friday."
   }
   ```
+```json
+{
+  "title": "Meeting Notes",
+    "content": "Discussed project updates and set next meeting for Friday."
+  
+}
+```
 
 ### Get Quicknotes
 
@@ -302,3 +332,13 @@ This example uses a real-life email and password format.
   - `Authorization: Bearer <token>`
 
 These Postman prompts will allow you to perform all CRUD operations starting from sign up to notifications.
+
+## Logout Endpoint Example
+
+To logout an existing user, send a POST request to the `/logout` endpoint with the following JSON payload:
+
+```json
+{
+  "email": "jane.smith@example.com",
+  "password": "P@ssw0rd!"
+}
