@@ -20,3 +20,4 @@ typing_extensions==4.12.2
 Werkzeug==3.0.1
 zipp==3.20.2
 Flask-Login==0.6.3
+flask-jwt-extended==4.6.0
