@@ -6,6 +6,7 @@ from src.models import db, User
 from src.routes import quicknotes_bp, tasks_bp, movies_bp, books_bp, calendar_bp, notifications_bp
 from flask_jwt_extended import JWTManager, create_access_token
 from flask_cors import CORS
+import traceback
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///quicknotes.db'
@@ -28,14 +29,30 @@ def load_user(user_id):
 
 @app.route('/register', methods=['POST'])
 def register():
-    data = request.get_json()
-    hashed_password = generate_password_hash(data['password'], method='pbkdf2:sha256')
-    new_user = User(email=data['email'], password=hashed_password)
-    db.session.add(new_user)
-    print(f"New user added to session: {new_user.email}")  # Debug statement
-    db.session.commit()
-    print("User committed to database")  # Debug statement
-    return jsonify({'message': 'User registered successfully'}), 201
+    try:
+        data = request.get_json()
+        email = data.get('email')
+        password = data.get('password')
+
+        if not email or not password:
+            return jsonify({'message': 'Email and password are required'}), 400
+
+        existing_user = User.query.filter_by(email=email).first()
+        if existing_user:
+            return jsonify({'message': 'Email already exists'}), 409
+
+        hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
+        new_user = User(email=email, password=hashed_password)
+        db.session.add(new_user)
+        print(f"New user added to session: {new_user.email}")  # Debug statement
+        db.session.commit()
+        print("User committed to database")  # Debug statement
+        return jsonify({'message': 'User registered successfully'}), 201
+    except Exception as e:
+        print(f"Error during registration: {e}")
+        traceback.print_exc()  # Print the full traceback
+        db.session.rollback()  # Rollback the session in case of error
+        return jsonify({'message': 'An internal server error occurred. Please try again later.'}), 500
 
 @app.route('/login', methods=['POST'])
 def login():
