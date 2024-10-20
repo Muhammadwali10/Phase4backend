@@ -20,9 +20,5 @@ typing_extensions==4.12.2
 Werkzeug==3.0.1
 zipp==3.20.2
 Flask-Login==0.6.3
-<<<<<<< HEAD
-flask-jwt-extended==4.6.0
-=======
 flask-jwt-extended==4.6.0
 flask_cors
->>>>>>> bc927f1175078d3fe8a7d38dba95ead47e8eeb1c
