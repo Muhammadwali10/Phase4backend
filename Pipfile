@@ -4,6 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+<<<<<<< HEAD
 flask-cors = "*"
 flask-sqlalchemy = "==3.1.1"
 flask-login = "==0.6.3"
@@ -28,6 +29,8 @@ typing-inspect = "==0.9.0"
 typing-extensions = "==4.12.2"
 werkzeug = "==3.0.1"
 zipp = "==3.20.2"
+=======
+>>>>>>> bc927f1175078d3fe8a7d38dba95ead47e8eeb1c
 
 [dev-packages]
 

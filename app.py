@@ -53,6 +53,14 @@ def register():
         traceback.print_exc()  # Print the full traceback
         db.session.rollback()  # Rollback the session in case of error
         return jsonify({'message': 'An internal server error occurred. Please try again later.'}), 500
+    data = request.get_json()
+    hashed_password = generate_password_hash(data['password'], method='pbkdf2:sha256')
+    new_user = User(email=data['email'], password=hashed_password)
+    db.session.add(new_user)
+    print(f"New user added to session: {new_user.email}")  # Debug statement
+    db.session.commit()
+    print("User committed to database")  # Debug statement
+    return jsonify({'message': 'User registered successfully'}), 201
 
 @app.route('/login', methods=['POST'])
 def login():
