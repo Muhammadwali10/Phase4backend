@@ -5,6 +5,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from src.models import db, User
 from src.routes import quicknotes_bp, tasks_bp, movies_bp, books_bp, calendar_bp, notifications_bp
 from flask_jwt_extended import JWTManager, create_access_token
+from flask_cors import CORS
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///quicknotes.db'
@@ -13,6 +14,7 @@ app.config['SECRET_KEY'] = 'your_secret_key'
 app.config['JWT_SECRET_KEY'] = 'your_jwt_secret_key'
 db.init_app(app)
 jwt = JWTManager(app)
+CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 
 with app.app_context():
     db.create_all()

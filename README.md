@@ -90,13 +90,7 @@ This example uses a real-life email and password format.
     "content": "Discussed project updates and set next meeting for Friday."
   }
   ```
-```json
-{
-  "title": "Meeting Notes",
-    "content": "Discussed project updates and set next meeting for Friday."
-  
-}
-```
+
 
 ### Get Quicknotes
 
